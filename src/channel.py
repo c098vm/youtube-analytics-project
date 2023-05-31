@@ -20,12 +20,70 @@ class Channel:
         self.video_count = self.channel["items"][0]["statistics"]["videoCount"] # количество видео
         self.view_count = self.channel["items"][0]["statistics"]["viewCount"] # общее количество просмотров
 
-    @property
-    def channel_id(self):
+
+    def __str__(self) -> str:
         """
-        Возвращает атрибут channel_id определяемую при инициализации экземпляра
+        Возвращает информацю об объекте класса для пользователей
+        в формате <название_канала> (<ссылка_на_канал>)
         """
-        return self.channel_id
+        return f'{self.title} ({self.url})'
+
+
+    def __add__(self, other):
+        """
+        Возвращает результат сложения экземпляров класса.
+        """
+        return int(self.subscriber_count) + int(other.subscriber_count)
+
+
+    def __sub__(self, other):
+        """
+        Возвращает результат вычитания экземпляров класса.
+        """
+        return int(self.subscriber_count) - int(other.subscriber_count)
+
+    def __lt__(self, other):
+        """
+        Возвращает результат сравнения "меньше" экземпляров класса.
+        """
+        return self.subscriber_count < other.subscriber_count
+
+
+    def __le__(self, other):
+        """
+        Возвращает результат сравнения "меньше либо равно" экземпляров класса.
+        """
+        return self.subscriber_count <= other.subscriber_count
+
+
+    def __gt__(self, other):
+        """
+        Возвращает результат сравнения "больше" экземпляров класса.
+        """
+        return self.subscriber_count > other.subscriber_count
+
+
+    def __ge__(self, other):
+        """
+        Возвращает результат сравнения "больше либо равно" экземпляров класса.
+        """
+        return self.subscriber_count >= other.subscriber_count
+
+
+    def __eq__(self, other):
+        """
+        Возвращает результат равенства экземпляров класса.
+        """
+        return self.subscriber_count == other.subscriber_count
+
+
+
+    # @property
+    # def channel_id(self):
+    #     """
+    #     Возвращает атрибут channel_id определяемую при инициализации экземпляра
+    #     """
+    #     return self.channel_id
 
     @classmethod
     def get_service(cls) -> object:
